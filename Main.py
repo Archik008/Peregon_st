@@ -1773,7 +1773,8 @@ class interface_manager:
         bannedNames = ["Turn_4_B", "2_deadEnd", "past_3", "past_2",
                        "before_002", "before_1", "before_5",
                        "4_2p", "before_Turn1", "before_H", "after_Ч",
-                       "before_Turn4"]
+                       "before_Turn4",
+                       "4_2p", "before_Turn1","1_With_2"]
 
         for name, (x, y) in positions.items():
             if name in bannedNames:

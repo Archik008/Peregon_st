@@ -12,20 +12,22 @@ positions = {
     "2_p": (130, Y_P1),
     "Ч": (400, Y_P1),
     "before_Turn1": (260, Y_P3),
-    "H": (450, Y_P3),
-    "1": (650, Y_P3),
+    "H": (520, Y_P3),
+    "1": (700, Y_P3),
     "before_1": (1200, Y_P3),
     "past_2": (1000, Y_P1),
     "past_3": (960, Y_P1),
     "before_002": (1200, Y_P1),
     "2_deadEnd": (570, Y_P2),
     "Turn_4_B": (700, Y_P2),
-    "HA": (890, Y_P2),
+    "HA": (930, Y_P2),
     "2": (1200, Y_P2),
     "empty_alb": (2500, Y_P2),
     "after_Ч": (570, Y_P1),
     "before_Turn4": (790, Y_P2),
-    "before_H": (380, Y_P3)
+    "before_H": (380, Y_P3),
+    "1_With_2": (1200, Y_P2),
+    "empty_alb": (2500, Y_P2)
 }
 segments = [
     ("before_5", "5"),
@@ -319,6 +321,70 @@ diagonal_config = {
 }
 
 signals_config_simple = {
+    "H":{
+        "mount": "top",
+        "pack_side": "left",
+        "count":2,
+        "colors": ["gray","red"],
+        "single": True
+    },
+    
+    "HA":{
+        "mount": "top",
+        "pack_side": "left",
+        "count":2,
+        "colors": ["gray", "red"],
+        "single": True
+    },
+    "Ч":{
+        "mount": "bottom",
+        "pack_side": "right",
+        "count":2,
+        "colors": ["gray", "red"],
+        "single": True
+    },
+    "1_With_2":{
+        "mount":"top",
+        "pack_side": "left",
+        "count": 1,
+        "colors": ["gray"],
+        "single": True
+    },
+    "1":{
+        "mount":"top",
+        "pack_side": "left",
+        "count": 1,
+        "colors": ["gray"],
+        "single": True
+    },
+    "5":{
+        "mount":"top",
+        "pack_side": "left",
+        "count": 1,
+        "colors": ["gray"],
+        "single": True
+    },
+    "2":{
+        "mount":"bottom",
+        "pack_side": "right",
+        "count": 1,
+        "colors": ["gray"],
+        "single": True
+    },
+    "past_2":{
+        "mount":"bottom",
+        "pack_side": "right",
+        "count": 1,
+        "colors": ["gray"],
+        "single": True
+    },
+    "2_p":{
+        "mount":"bottom",
+        "pack_side": "right",
+        "count": 1,
+        "colors": ["gray"],
+        "single": True
+    },
     # "Ч1": {
     #     "mount": "bottom",
     #     "pack_side": "right",
@@ -499,6 +565,60 @@ signals_config_simple = {
 
 
 signals_config = {
+    "H":{
+        "mount": "top",
+        "pack_side": "left",
+        "count":5,
+        "colors": ["yellow", "green", "red", "black", "white"],
+    },
+    "HA":{
+        "mount": "top",
+        "pack_side": "left",
+        "count":5,
+        "colors":["white", "yellow","red","black","yellow"]
+    },
+    "Ч":{
+        "mount": "bottom",
+        "pack_side": "right",
+        "count":5,
+        "colors": ["white", "yellow", "red", "green", "yellow"],
+    },
+    "2":{
+        "mount":"bottom",
+        "pack_side": "right",
+        "count": 3,
+        "colors": ["red", "green", "yellow"]
+    },
+    "past_2":{
+        "mount":"bottom",
+        "pack_side": "right",
+        "count": 3,
+        "colors": ["red", "green", "yellow"]
+    },
+    "2_p":{
+        "mount":"bottom",
+        "pack_side": "right",
+        "count": 3,
+        "colors": ["red", "green", "yellow"]
+    },
+    "1_With_2":{
+        "mount":"top",
+        "pack_side": "left",
+        "count": 3,
+        "colors": ["red", "green", "yellow"]
+    },
+    "1":{
+        "mount":"top",
+        "pack_side": "left",
+        "count": 3,
+        "colors": ["red", "green", "yellow"]
+    },
+    "5":{
+        "mount":"top",
+        "pack_side": "left",
+        "count": 3,
+        "colors": ["red", "green","yellow" ]
+    }
     # "Ч1": {
     #     "mount": "bottom",
     #     "pack_side": "right",
