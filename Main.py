@@ -1620,15 +1620,16 @@ class SwitchManager:
 
 
     def initialize_switches(self):
-        self.set_diagonal_mode("AKZHT_Turn19", "left")
-        self.set_diagonal_mode("AKZHT_Turn17", "left")
-        self.set_diagonal_mode("AKZHT_Turn5-7", "left")
-        self.set_diagonal_mode("AKZHT_Turn13-15", "left")
-        self.set_diagonal_mode("AKZHT_Turn9-11", "left")
-        self.set_diagonal_mode("AKZHT_Turn1-3", "left")
-        self.set_diagonal_mode("AKZHT_Turn6-8", "left")
-        self.set_diagonal_mode("AKZHT_Turn10-12", "left")
-        self.set_diagonal_mode("AKZHT_Turn16", "left")
+        ...
+        # self.set_diagonal_mode("AKZHT_Turn19", "left")
+        # self.set_diagonal_mode("AKZHT_Turn17", "left")
+        # self.set_diagonal_mode("AKZHT_Turn5-7", "left")
+        # self.set_diagonal_mode("AKZHT_Turn13-15", "left")
+        # self.set_diagonal_mode("AKZHT_Turn9-11", "left")
+        # self.set_diagonal_mode("AKZHT_Turn1-3", "left")
+        # self.set_diagonal_mode("AKZHT_Turn6-8", "left")
+        # self.set_diagonal_mode("AKZHT_Turn10-12", "left")
+        # self.set_diagonal_mode("AKZHT_Turn16", "left")
 
     def on_switch_mode_selected(self, name, mode):
         text = canvas.itemcget(switch_text_ids[name], "text")
@@ -1731,6 +1732,7 @@ class interface_manager:
         self.switch_manager = None
         self.route_manager = None
         self.signal_manager = None
+        self.drawDeadEnd("2_deadEnd", "right", 0)
         #self.drawDeadEnd("pastM1", "right", 0)
         #self.drawDeadEnd("past2", "right", 0)
         #self.drawDeadEnd("past4", "right", 0)
@@ -1769,12 +1771,9 @@ class interface_manager:
         self.btn_maneuver.place(x=center_x + offset - 100, y=buttons_y)
         self.btn_maneuver.place_forget()
 
-        bannedNames = ["pastM7", "Ч1M1mid", "M5M3mid", "Ч2M5mid", "Ч3beforeM7", "Ч3M7mid", "beforeM7", "Ч1M1second",
-                        "beforeM1", "M5M3third", "beforeM5", "Ч2M5third", "Ч1M1first", "M3MID6",
-                        "Turn8B_M8mid", "Turn_8_B", "Turn12_16mid",
-                        "Turn_14_J", "Turn_6_A",
-                        "Turn_6_B", "Turn_8_B",
-                        "before_M10", "1_AK", "before_M6"]
+        bannedNames = ["Turn_4_B", "2_deadEnd", "past_3", "past_2",
+                       "before_002", "before_1", "before_5",
+                       "4_2p", "before_Turn1"]
 
         for name, (x, y) in positions.items():
             if name in bannedNames:
@@ -2459,6 +2458,9 @@ for a, b in segments:
 # canvas.create_text(1280, 230, text="15", font=("Bahnschrift bold", 16), fill="#4a494a")
 
 # canvas.create_text(1180, 260, text="17", font=("Bahnschrift bold", 16), fill="#4a494a")
+
+AddSplitDiagonalDasAuto(390, 250, 570, 445, 20, 20, "AKZHT_Turn12", "Turn_1", "Turn_2")
+AddSplitDiagonalDasAuto(620, 455, 795, 665, 20, 20, "AKZHT_Turn34", "Turn_3", "Turn_4")
 
 
 def get_switch_name_from_event(event):
