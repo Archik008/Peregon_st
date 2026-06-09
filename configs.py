@@ -21,13 +21,14 @@ positions = {
     "2_deadEnd": (570, Y_P2),
     "Turn_4_B": (700, Y_P2),
     "HA": (930, Y_P2),
-    "2": (1200, Y_P2),
+    "2hide": (1200, Y_P2),
     "empty_alb": (2500, Y_P2),
     "after_Ч": (570, Y_P1),
     "before_Turn4": (790, Y_P2),
     "before_H": (380, Y_P3),
-    "1_With_2": (1200, Y_P2),
-    "empty_alb": (2500, Y_P2)
+    "1.1": (1200, Y_P2),
+    "empty_alb": (2500, Y_P2),
+    "2": (1200,Y_P2),
 }
 segments = [
     ("before_5", "5"),
@@ -343,46 +344,46 @@ signals_config_simple = {
         "colors": ["gray", "red"],
         "single": True
     },
-    "1_With_2":{
+    "1.1":{
         "mount":"top",
         "pack_side": "left",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "1":{
         "mount":"top",
         "pack_side": "left",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "5":{
         "mount":"top",
         "pack_side": "left",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "2":{
         "mount":"bottom",
         "pack_side": "right",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "past_2":{
         "mount":"bottom",
         "pack_side": "right",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "2_p":{
         "mount":"bottom",
         "pack_side": "right",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     # "Ч1": {
@@ -601,7 +602,7 @@ signals_config = {
         "count": 3,
         "colors": ["red", "green", "yellow"]
     },
-    "1_With_2":{
+    "1.1":{
         "mount":"top",
         "pack_side": "left",
         "count": 3,
