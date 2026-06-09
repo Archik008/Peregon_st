@@ -1041,6 +1041,7 @@ class OccupancyManager:
 
     def update_paint_diagonals(self):
         for diag_name, lines in diag_ids.items():
+            print(diag_name, route_manager.get_diag_counter(diag_name))
             if diag_occ_train.get(diag_name, 1) == 0:
                 interface_manager.paint_diagonal(diag_name, "red")
                 continue
@@ -1151,8 +1152,12 @@ class RouteManager:
         "AKZHT_Turn5": 0,
         "AKZHT_Turn7": 0,
 
-        "AKZHT_Turn1": 0,
+        "AKZHT_Turn_1": 0,
         "AKZHT_Turn3": 0,
+        "AKZHT_Turn_2": 0,
+        "AKZHT_Turn_3": 0,
+        "AKZHT_Turn_4": 0,
+
 
         "AKZHT_Turn9": 0,
         "AKZHT_Turn11": 0,
@@ -1162,7 +1167,9 @@ class RouteManager:
 
         "AKZHT_Turn6": 0,
         "AKZHT_Turn8": 0,
-        "AKZHT_Turn16": 0
+        "AKZHT_Turn16": 0,
+        "AKZHT_Turn10": 0,
+        "AKZHT_Turn12": 0,
     }
 
     def __init__(self):
@@ -1620,16 +1627,8 @@ class SwitchManager:
 
 
     def initialize_switches(self):
-        ...
-        # self.set_diagonal_mode("AKZHT_Turn19", "left")
-        # self.set_diagonal_mode("AKZHT_Turn17", "left")
-        # self.set_diagonal_mode("AKZHT_Turn5-7", "left")
-        # self.set_diagonal_mode("AKZHT_Turn13-15", "left")
-        # self.set_diagonal_mode("AKZHT_Turn9-11", "left")
-        # self.set_diagonal_mode("AKZHT_Turn1-3", "left")
-        # self.set_diagonal_mode("AKZHT_Turn6-8", "left")
-        # self.set_diagonal_mode("AKZHT_Turn10-12", "left")
-        # self.set_diagonal_mode("AKZHT_Turn16", "left")
+        self.set_diagonal_mode("AKZHT_Turn12", "left")
+        self.set_diagonal_mode("AKZHT_Turn34", "left")
 
     def on_switch_mode_selected(self, name, mode):
         text = canvas.itemcget(switch_text_ids[name], "text")
@@ -1773,7 +1772,8 @@ class interface_manager:
 
         bannedNames = ["Turn_4_B", "2_deadEnd", "past_3", "past_2",
                        "before_002", "before_1", "before_5",
-                       "4_2p", "before_Turn1"]
+                       "4_2p", "before_Turn1", "before_H", "after_Ч",
+                       "before_Turn4"]
 
         for name, (x, y) in positions.items():
             if name in bannedNames:
@@ -1900,8 +1900,12 @@ class interface_manager:
                 if nameDiag == "AKZHT_Turn13-15":
                     canvas.itemconfig(segment_ids[("beforeM7", "M7")], width=6)
                 if nameDiag == "AKZHT_Turn10-12":
-                    print("lefted")
                     canvas.itemconfig(segment_ids[("Turn8B_M8mid", "H1")], width=6)
+                if nameDiag == "AKZHT_Turn12":
+                    canvas.itemconfig(segment_ids[("Ч", "after_Ч")], width=6)
+                    canvas.itemconfig(segment_ids[("before_H", "H")], width=6)
+                if nameDiag == "AKZHT_Turn34":
+                    canvas.itemconfig(segment_ids[("Turn_4_B", "before_Turn4")], width=6)
             else:
                 self.setBranchLeft(nameDiag, left_cfg["disconnected"])
                 self.branchWidth(nameDiag, 2)
@@ -1938,6 +1942,11 @@ class interface_manager:
                 if nameDiag == "AKZHT_Turn10-12":
                     print("righted")
                     canvas.itemconfig(segment_ids[("Turn8B_M8mid", "H1")], width=2)
+                if nameDiag == "AKZHT_Turn12":
+                    canvas.itemconfig(segment_ids[("Ч", "after_Ч")], width=2)
+                    canvas.itemconfig(segment_ids[("before_H", "H")], width=2)
+                if nameDiag == "AKZHT_Turn34":
+                    canvas.itemconfig(segment_ids[("Turn_4_B", "before_Turn4")], width=2)
             else:
                 self.setBranchRight(nameDiag, right_cfg["disconnected"])
                 self.branchWidth(nameDiag, 2)
@@ -2241,6 +2250,12 @@ seg_occ_train = {
 
     ("M3", "M3MID6"): 1,
     ("M3MID6", "6"): 1,
+
+    ("Turn_4_B", "before_Turn4"): 1,
+    ("before_Turn4", "HA"): 1,
+    ("HA", "2"): 1,
+    ("Ч", "after_Ч"): 1,
+    ("after_Ч", "past_3"): 1,
 }
 diag_occ_train = {
     "AKZHT_Turn19": 1,
@@ -2260,8 +2275,9 @@ diag_occ_train = {
 
     "AKZHT_Turn10": 1,
     "AKZHT_Turn12": 1,
-    "AKZHT_Turn16": 1
-
+    "AKZHT_Turn16": 1,
+    "AKZHT_Turn12": 1,
+    "AKZHT_Turn34": 1,
 }
 
 for block, segs in segment_groups.items():
@@ -2414,10 +2430,13 @@ for a, b in segments:
     x2, y2 = positions[b]
     a_and_b = (a,b)
     BlockSegments = [("H2", "Ч2"),  ("H3", "Ч3"),  ("H1", "Ч1")]
+    excluded_segs = [("Ч", "after_Ч"), ("Turn_4_B", "before_Turn4"), ("before_Turn1", "before_H")]
     if a_and_b in BlockSegments:
         seg = canvas.create_line(x1, y1, x2-15, y2, width=6, fill=interface_manager.line_color_main)
+    if a_and_b in excluded_segs:
+        seg = canvas.create_line(x1, y1, x2, y2, width=6, fill=interface_manager.line_color_main)
     else:
-        seg = canvas.create_line(x1, y1, x2 -7, y2, width=6, fill=interface_manager.line_color_main)
+        seg = canvas.create_line(x1, y1, x2-7, y2, width=6, fill=interface_manager.line_color_main)
     segment_ids[(a, b)] = seg
     segment_ids[(b, a)] = seg
 
@@ -2459,8 +2478,8 @@ for a, b in segments:
 
 # canvas.create_text(1180, 260, text="17", font=("Bahnschrift bold", 16), fill="#4a494a")
 
-AddSplitDiagonalDasAuto(390, 250, 570, 445, 20, 20, "AKZHT_Turn12", "Turn_1", "Turn_2")
-AddSplitDiagonalDasAuto(620, 455, 795, 665, 20, 20, "AKZHT_Turn34", "Turn_3", "Turn_4")
+AddSplitDiagonalDasAuto(390, 245, 570, 448, 20, 20, "AKZHT_Turn12", "AKZHT_Turn_1", "AKZHT_Turn_2")
+AddSplitDiagonalDasAuto(620, 451, 795, 664, 20, 20, "AKZHT_Turn34", "AKZHT_Turn_3", "AKZHT_Turn_4")
 
 
 def get_switch_name_from_event(event):
@@ -2538,24 +2557,12 @@ def blink_diag(name, duration_ms=2000, interval_ms=200):
             return
 
         color = "#75CEFF" if state else interface_manager.line_color_main
-        if name == "AKZHT_Turn5-7":
-            interface_manager.paint_diagonal("AKZHT_Turn5", color)
-            interface_manager.paint_diagonal("AKZHT_Turn7", color)
-        if name == "AKZHT_Turn13-15":
-            interface_manager.paint_diagonal("AKZHT_Turn13", color)
-            interface_manager.paint_diagonal("AKZHT_Turn15", color)
-        if name == "AKZHT_Turn9-11":
-            interface_manager.paint_diagonal("AKZHT_Turn9", color)
-            interface_manager.paint_diagonal("AKZHT_Turn11", color)
-        if name == "AKZHT_Turn1-3":
-            interface_manager.paint_diagonal("AKZHT_Turn1", color)
-            interface_manager.paint_diagonal("AKZHT_Turn3", color)
-        if name == "AKZHT_Turn6-8":
-            interface_manager.paint_diagonal("AKZHT_Turn6", color)
-            interface_manager.paint_diagonal("AKZHT_Turn8", color)
-        if name == "AKZHT_Turn10-12":
-            interface_manager.paint_diagonal("AKZHT_Turn10", color)
-            interface_manager.paint_diagonal("AKZHT_Turn12", color)
+        if name == "AKZHT_Turn12":
+            interface_manager.paint_diagonal("AKZHT_Turn_1", color)
+            interface_manager.paint_diagonal("AKZHT_Turn_2", color)
+        if name == "AKZHT_Turn34":
+            interface_manager.paint_diagonal("AKZHT_Turn_3", color),
+            interface_manager.paint_diagonal("AKZHT_Turn_4", color)
         else:
             interface_manager.paint_diagonal(name, color)
         root.after(interval_ms, _step, not state)
@@ -2700,8 +2707,8 @@ button_labels = {
 
     "AKZHT_Turn1": "AKZHT_Turn3",
     "AKZHT_Turn3": "AKZHT_Turn1",
-
-
+    "AKZHT_Turn10": "AKZHT_Turn12",
+    "AKZHT_Turn12": "AKZHT_Turn10",
 }
 
 def do(item_type, item_id):

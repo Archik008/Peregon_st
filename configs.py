@@ -22,23 +22,29 @@ positions = {
     "Turn_4_B": (700, Y_P2),
     "HA": (890, Y_P2),
     "2": (1200, Y_P2),
-    "empty_alb": (2500, Y_P2)
+    "empty_alb": (2500, Y_P2),
+    "after_Ч": (570, Y_P1),
+    "before_Turn4": (790, Y_P2),
+    "before_H": (380, Y_P3)
 }
 segments = [
     ("before_5", "5"),
     ("5", "before_Turn1"),
-    ("before_Turn1", "H"),
+    ("before_Turn1", "before_H"),
+    ("before_H", "H"),
     ("H", "1"),
     ("1", "before_1"),
     ("4_2p", "2_p"),
     ("2_p", "Ч"),
-    ("Ч", "past_3"),
     ("past_3", "past_2"),
     ("past_2", "before_002"),
     ("2", "empty_alb"),
     ("2_deadEnd", "Turn_4_B"),
-    ("Turn_4_B", "HA"),
-    ("HA", "2")
+    ("Turn_4_B", "before_Turn4"),
+    ("before_Turn4", "HA"),
+    ("HA", "2"),
+    ("Ч", "after_Ч"),
+    ("after_Ч", "past_3")
     # ("H4", "Ч4"),
     # ("H2", "Ч2"),
     # ("H1", "Ч1"),
@@ -182,9 +188,17 @@ split_parts_map = {
     "AKZHT_Turn10-12": {
         "partA": "AKZHT_Turn10",
         "partB": "AKZHT_Turn12"
+    },
+    "AKZHT_Turn12": {
+        "partA": "AKZHT_Turn_1",
+        "partB": "AKZHT_Turn_2"
+    },
+    "AKZHT_Turn34": {
+        "partA": "AKZHT_Turn_3",
+        "partB": "AKZHT_Turn_4"
     }
 }
-switch_list = []
+switch_list = ["AKZHT_Turn12", "AKZHT_Turn34"]
 
 default_switch_mode = {
     "AKZHT_Turn19": "left",
@@ -195,7 +209,9 @@ default_switch_mode = {
     "AKZHT_Turn1-3": "left",
     "AKZHT_Turn6-8": "left",
     "AKZHT_Turn10-12": "left",
-    "AKZHT_Turn16": "left"
+    "AKZHT_Turn16": "left",
+    "AKZHT_Turn12": "left",
+    "AKZHT_Turn34": "left"
 }
 segment_to_signal = {
     ("Ч3beforeM7", "Ч3"): "Ч3",
@@ -290,6 +306,16 @@ diagonal_config = {
     #     "right": {"exists": True, "connected": +5, "disconnected": -5},
     #     "default": "both"
     # }
+    "AKZHT_Turn12": {
+        "left": {"exists": True, "connected": 5, "disconnected": 0},
+        "right": {"exists": True, "connected": +5, "disconnected": 0},
+        "default": "both"
+    },
+    "AKZHT_Turn34": {
+        "left": {"exists": True, "connected": 5, "disconnected": 0},
+        "right": {"exists": True, "connected": +5, "disconnected": 0},
+        "default": "both"
+    }
 }
 
 signals_config_simple = {
@@ -636,8 +662,6 @@ ROUTE_SIGNAL_MAP: dict[tuple[str, str], dict[str, dict[str, object]]] = {
     ("1", "Ч5"): {
         "H": {"lamps": {"yellow": {"on": True, "blink": False}, }, },
     },
-
-
 }
 
 routes_dir = {
