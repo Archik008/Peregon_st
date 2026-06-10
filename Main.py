@@ -289,6 +289,20 @@ class SignalManager():
             },
             "manual": False,
         },
+        "2": {
+            "lamps": {
+                "grey": {"on": True, "blink": False},
+                "white": {"on": False, "blink": False},
+            },
+            "manual": False,
+        },
+        "1_With_2": {
+            "lamps": {
+                "grey": {"on": True, "blink": False},
+                "white": {"on": False, "blink": False},
+            },
+            "manual": False,
+        },
     }
     active_signal_routes = {}
     def __init__(self, canvas, root):
@@ -1041,7 +1055,6 @@ class OccupancyManager:
 
     def update_paint_diagonals(self):
         for diag_name, lines in diag_ids.items():
-            print(diag_name, route_manager.get_diag_counter(diag_name))
             if diag_occ_train.get(diag_name, 1) == 0:
                 interface_manager.paint_diagonal(diag_name, "red")
                 continue
@@ -1774,7 +1787,7 @@ class interface_manager:
                        "before_002", "before_1", "before_5",
                        "4_2p", "before_Turn1", "before_H", "after_Ч",
                        "before_Turn4",
-                       "4_2p", "before_Turn1","1_With_2"]
+                       "4_2p", "before_Turn1","1_With_2", "2", "2_p"]
 
         for name, (x, y) in positions.items():
             if name in bannedNames:
@@ -2478,6 +2491,10 @@ for a, b in segments:
 # canvas.create_text(1280, 230, text="15", font=("Bahnschrift bold", 16), fill="#4a494a")
 
 # canvas.create_text(1180, 260, text="17", font=("Bahnschrift bold", 16), fill="#4a494a")
+canvas.create_text(1220, 665 + 35, text="2", fill="white", font=("Bahnschrift SemiBold", 14))
+canvas.create_text(1180, 665 - 40, text="1", fill="white", font=("Bahnschrift SemiBold", 14))
+canvas.create_text(150, 450 + 35, text="2", fill="white", font=("Bahnschrift SemiBold", 14))
+
 
 AddSplitDiagonalDasAuto(390, 245, 570, 448, 20, 20, "AKZHT_Turn12", "AKZHT_Turn_1", "AKZHT_Turn_2")
 AddSplitDiagonalDasAuto(620, 451, 795, 664, 20, 20, "AKZHT_Turn34", "AKZHT_Turn_3", "AKZHT_Turn_4")
