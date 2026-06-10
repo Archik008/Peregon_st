@@ -12,8 +12,8 @@ positions = {
     "2_p": (130, Y_P1),
     "Ч": (400, Y_P1),
     "before_Turn1": (260, Y_P3),
-    "H": (520, Y_P3),
-    "1": (700, Y_P3),
+    "H": (450, Y_P3),
+    "1": (650, Y_P3),
     "before_1": (1200, Y_P3),
     "past_2": (1000, Y_P1),
     "past_3": (960, Y_P1),
@@ -21,13 +21,13 @@ positions = {
     "2_deadEnd": (570, Y_P2),
     "Turn_4_B": (700, Y_P2),
     "HA": (930, Y_P2),
-    "2": (1200, Y_P2),
     "empty_alb": (2500, Y_P2),
     "after_Ч": (570, Y_P1),
     "before_Turn4": (790, Y_P2),
     "before_H": (380, Y_P3),
-    "1_With_2": (1200, Y_P2),
-    "empty_alb": (2500, Y_P2)
+    "1.1": (1200, Y_P2),
+    "empty_alb": (2500, Y_P2),
+    "2": (1200,Y_P2),
 }
 segments = [
     ("before_5", "5"),
@@ -189,18 +189,18 @@ split_parts_map = {
     },
     "AKZHT_Turn10-12": {
         "partA": "AKZHT_Turn10",
-        "partB": "AKZHT_Turn12"
+        "partB": "Peregon_Turn1-2"
     },
-    "AKZHT_Turn12": {
-        "partA": "AKZHT_Turn_1",
-        "partB": "AKZHT_Turn_2"
+    "Peregon_Turn1-2": {
+        "partA": "Peregon_Turn_1",
+        "partB": "Peregon_Turn_2"
     },
-    "AKZHT_Turn34": {
-        "partA": "AKZHT_Turn_3",
-        "partB": "AKZHT_Turn_4"
+    "Peregon_Turn3-4": {
+        "partA": "Peregon_Turn_3",
+        "partB": "Peregon_Turn_4"
     }
 }
-switch_list = ["AKZHT_Turn12", "AKZHT_Turn34"]
+switch_list = ["Peregon_Turn1-2", "Peregon_Turn3-4"]
 
 default_switch_mode = {
     "AKZHT_Turn19": "left",
@@ -212,8 +212,8 @@ default_switch_mode = {
     "AKZHT_Turn6-8": "left",
     "AKZHT_Turn10-12": "left",
     "AKZHT_Turn16": "left",
-    "AKZHT_Turn12": "left",
-    "AKZHT_Turn34": "left"
+    "Peregon_Turn1-2": "left",
+    "Peregon_Turn3-4": "left"
 }
 segment_to_signal = {
     ("Ч3beforeM7", "Ч3"): "Ч3",
@@ -308,12 +308,12 @@ diagonal_config = {
     #     "right": {"exists": True, "connected": +5, "disconnected": -5},
     #     "default": "both"
     # }
-    "AKZHT_Turn12": {
+    "Peregon_Turn1-2": {
         "left": {"exists": True, "connected": 5, "disconnected": 0},
         "right": {"exists": True, "connected": +5, "disconnected": 0},
         "default": "both"
     },
-    "AKZHT_Turn34": {
+    "Peregon_Turn3-4": {
         "left": {"exists": True, "connected": 5, "disconnected": 0},
         "right": {"exists": True, "connected": +5, "disconnected": 0},
         "default": "both"
@@ -343,46 +343,46 @@ signals_config_simple = {
         "colors": ["gray", "red"],
         "single": True
     },
-    "1_With_2":{
+    "1.1":{
         "mount":"top",
         "pack_side": "left",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "1":{
         "mount":"top",
         "pack_side": "left",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "5":{
         "mount":"top",
         "pack_side": "left",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "2":{
         "mount":"bottom",
         "pack_side": "right",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "past_2":{
         "mount":"bottom",
         "pack_side": "right",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     "2_p":{
         "mount":"bottom",
         "pack_side": "right",
         "count": 1,
-        "colors": ["gray"],
+        "colors": ["grey", "white"],
         "single": True
     },
     # "Ч1": {
@@ -601,7 +601,7 @@ signals_config = {
         "count": 3,
         "colors": ["red", "green", "yellow"]
     },
-    "1_With_2":{
+    "1.1":{
         "mount":"top",
         "pack_side": "left",
         "count": 3,

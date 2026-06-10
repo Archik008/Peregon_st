@@ -1165,11 +1165,11 @@ class RouteManager:
         "AKZHT_Turn5": 0,
         "AKZHT_Turn7": 0,
 
-        "AKZHT_Turn_1": 0,
+        "Peregon_Turn_1": 0,
         "AKZHT_Turn3": 0,
-        "AKZHT_Turn_2": 0,
-        "AKZHT_Turn_3": 0,
-        "AKZHT_Turn_4": 0,
+        "Peregon_Turn_2": 0,
+        "Peregon_Turn_3": 0,
+        "Peregon_Turn_4": 0,
 
 
         "AKZHT_Turn9": 0,
@@ -1182,7 +1182,7 @@ class RouteManager:
         "AKZHT_Turn8": 0,
         "AKZHT_Turn16": 0,
         "AKZHT_Turn10": 0,
-        "AKZHT_Turn12": 0,
+        "Peregon_Turn1-2": 0,
     }
 
     def __init__(self):
@@ -1640,8 +1640,8 @@ class SwitchManager:
 
 
     def initialize_switches(self):
-        self.set_diagonal_mode("AKZHT_Turn12", "left")
-        self.set_diagonal_mode("AKZHT_Turn34", "left")
+        self.set_diagonal_mode("Peregon_Turn1-2", "left")
+        self.set_diagonal_mode("Peregon_Turn3-4", "left")
 
     def on_switch_mode_selected(self, name, mode):
         text = canvas.itemcget(switch_text_ids[name], "text")
@@ -1735,6 +1735,7 @@ class SwitchManager:
 
 class interface_manager:
     line_color_main = "white"
+    node_ids = {}
     def __init__(self):
         self.line_color_main = "white"
         self.canvas = canvas
@@ -1787,7 +1788,7 @@ class interface_manager:
                        "before_002", "before_1", "before_5",
                        "4_2p", "before_Turn1", "before_H", "after_Ч",
                        "before_Turn4",
-                       "4_2p", "before_Turn1","1_With_2", "2", "2_p"]
+                       "4_2p", "before_Turn1","1_With_2", "2", "2_p", "1.1"]
 
         for name, (x, y) in positions.items():
             if name in bannedNames:
@@ -1915,10 +1916,10 @@ class interface_manager:
                     canvas.itemconfig(segment_ids[("beforeM7", "M7")], width=6)
                 if nameDiag == "AKZHT_Turn10-12":
                     canvas.itemconfig(segment_ids[("Turn8B_M8mid", "H1")], width=6)
-                if nameDiag == "AKZHT_Turn12":
+                if nameDiag == "Peregon_Turn1-2":
                     canvas.itemconfig(segment_ids[("Ч", "after_Ч")], width=6)
                     canvas.itemconfig(segment_ids[("before_H", "H")], width=6)
-                if nameDiag == "AKZHT_Turn34":
+                if nameDiag == "Peregon_Turn3-4":
                     canvas.itemconfig(segment_ids[("Turn_4_B", "before_Turn4")], width=6)
             else:
                 self.setBranchLeft(nameDiag, left_cfg["disconnected"])
@@ -1956,10 +1957,10 @@ class interface_manager:
                 if nameDiag == "AKZHT_Turn10-12":
                     print("righted")
                     canvas.itemconfig(segment_ids[("Turn8B_M8mid", "H1")], width=2)
-                if nameDiag == "AKZHT_Turn12":
+                if nameDiag == "Peregon_Turn1-2":
                     canvas.itemconfig(segment_ids[("Ч", "after_Ч")], width=2)
                     canvas.itemconfig(segment_ids[("before_H", "H")], width=2)
-                if nameDiag == "AKZHT_Turn34":
+                if nameDiag == "Peregon_Turn3-4":
                     canvas.itemconfig(segment_ids[("Turn_4_B", "before_Turn4")], width=2)
             else:
                 self.setBranchRight(nameDiag, right_cfg["disconnected"])
@@ -2288,10 +2289,10 @@ diag_occ_train = {
     "AKZHT_Turn15": 1,
 
     "AKZHT_Turn10": 1,
-    "AKZHT_Turn12": 1,
+    "Peregon_Turn1-2": 1,
     "AKZHT_Turn16": 1,
-    "AKZHT_Turn12": 1,
-    "AKZHT_Turn34": 1,
+    "Peregon_Turn1-2": 1,
+    "Peregon_Turn3-4": 1,
 }
 
 for block, segs in segment_groups.items():
@@ -2467,11 +2468,11 @@ for a, b in segments:
 
 # AddSplitDiagonalDasAuto(1485, 363.5,1590, 487, 30, 30, "AKZHT_Turn1-3", "AKZHT_Turn1", "AKZHT_Turn3")
 
-# AddDiagonal(360, 490, 440, 605, 20, 60, "AKZHT_Turn_14")
+# AddDiagonal(360, 490, 440, 605, 20, 60, "Peregon_Turn_14")
 
 # AddSplitDiagonalDasAuto(320, 366, 250, 484, -20, -20, "AKZHT_Turn6-8", "AKZHT_Turn6", "AKZHT_Turn8")
 
-# AddSplitDiagonalDasAuto(440, 245, 370, 365, -20, -20, "AKZHT_Turn10-12", "AKZHT_Turn10", "AKZHT_Turn12")
+# AddSplitDiagonalDasAuto(440, 245, 370, 365, -20, -20, "AKZHT_Turn10-12", "AKZHT_Turn10", "Peregon_Turn1-2")
 
 # AddDiagonal(475, 242, 550, 125, 10, 50, "AKZHT_Turn16")
 
@@ -2495,9 +2496,14 @@ canvas.create_text(1220, 665 + 35, text="2", fill="white", font=("Bahnschrift Se
 canvas.create_text(1180, 665 - 40, text="1", fill="white", font=("Bahnschrift SemiBold", 14))
 canvas.create_text(150, 450 + 35, text="2", fill="white", font=("Bahnschrift SemiBold", 14))
 
+canvas.create_text(380, 225, text="1", font=("Bahnschrift bold", 16), fill="#4a494a")
+canvas.create_text(585, 468, text="2", font=("Bahnschrift bold", 16), fill="#4a494a")
+canvas.create_text(610, 430, text="3", font=("Bahnschrift bold", 16), fill="#4a494a")
+canvas.create_text(805, 680, text="4", font=("Bahnschrift bold", 16), fill="#4a494a")
 
-AddSplitDiagonalDasAuto(390, 245, 570, 448, 20, 20, "AKZHT_Turn12", "AKZHT_Turn_1", "AKZHT_Turn_2")
-AddSplitDiagonalDasAuto(620, 451, 795, 664, 20, 20, "AKZHT_Turn34", "AKZHT_Turn_3", "AKZHT_Turn_4")
+
+AddSplitDiagonalDasAuto(390, 245, 570, 448, 20, 20, "Peregon_Turn1-2", "Peregon_Turn_1", "Peregon_Turn_2")
+AddSplitDiagonalDasAuto(620, 451, 795, 664, 20, 20, "Peregon_Turn3-4", "Peregon_Turn_3", "Peregon_Turn_4")
 
 
 def get_switch_name_from_event(event):
@@ -2569,18 +2575,18 @@ def blink_diag(name, duration_ms=2000, interval_ms=200):
                 interface_manager.paint_diagonal("AKZHT_Turn8", interface_manager.line_color_main)
             if name == "AKZHT_Turn10-12":
                 interface_manager.paint_diagonal("AKZHT_Turn10", interface_manager.line_color_main)
-                interface_manager.paint_diagonal("AKZHT_Turn12", interface_manager.line_color_main)
+                interface_manager.paint_diagonal("Peregon_Turn1-2", interface_manager.line_color_main)
             else:
                 interface_manager.paint_diagonal(name, interface_manager.line_color_main)
             return
 
         color = "#75CEFF" if state else interface_manager.line_color_main
-        if name == "AKZHT_Turn12":
-            interface_manager.paint_diagonal("AKZHT_Turn_1", color)
-            interface_manager.paint_diagonal("AKZHT_Turn_2", color)
-        if name == "AKZHT_Turn34":
-            interface_manager.paint_diagonal("AKZHT_Turn_3", color),
-            interface_manager.paint_diagonal("AKZHT_Turn_4", color)
+        if name == "Peregon_Turn1-2":
+            interface_manager.paint_diagonal("Peregon_Turn_1", color)
+            interface_manager.paint_diagonal("Peregon_Turn_2", color)
+        if name == "Peregon_Turn3-4":
+            interface_manager.paint_diagonal("Peregon_Turn_3", color),
+            interface_manager.paint_diagonal("Peregon_Turn_4", color)
         else:
             interface_manager.paint_diagonal(name, color)
         root.after(interval_ms, _step, not state)
@@ -2725,8 +2731,8 @@ button_labels = {
 
     "AKZHT_Turn1": "AKZHT_Turn3",
     "AKZHT_Turn3": "AKZHT_Turn1",
-    "AKZHT_Turn10": "AKZHT_Turn12",
-    "AKZHT_Turn12": "AKZHT_Turn10",
+    "AKZHT_Turn10": "Peregon_Turn1-2",
+    "Peregon_Turn1-2": "AKZHT_Turn10",
 }
 
 def do(item_type, item_id):
@@ -2814,6 +2820,7 @@ route_manager = RouteManager()
 SignalManage.set_dependencies(route_manager)
 switch_manager = SwitchManager()
 interface_manager = interface_manager()
+
 switch_manager.set_dependencies(route_manager, interface_manager)
 route_manager.set_dependencies(interface_manager, switch_manager)
 interface_manager.set_dependencies(route_manager, switch_manager, SignalManage)
