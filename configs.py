@@ -21,7 +21,6 @@ positions = {
     "2_deadEnd": (570, Y_P2),
     "Turn_4_B": (700, Y_P2),
     "HA": (930, Y_P2),
-    "2hide": (1200, Y_P2),
     "empty_alb": (2500, Y_P2),
     "after_Ч": (570, Y_P1),
     "before_Turn4": (790, Y_P2),

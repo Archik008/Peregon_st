@@ -1788,7 +1788,7 @@ class interface_manager:
                        "before_002", "before_1", "before_5",
                        "4_2p", "before_Turn1", "before_H", "after_Ч",
                        "before_Turn4",
-                       "4_2p", "before_Turn1","1_With_2", "2", "2_p"]
+                       "4_2p", "before_Turn1","1_With_2", "2", "2_p", "1.1"]
 
         for name, (x, y) in positions.items():
             if name in bannedNames:
@@ -1796,8 +1796,6 @@ class interface_manager:
             node = canvas.create_text(x, y - 28, text=name, tags=(f"node_{name}", "node"), fill=self.line_color_main,
                                       font=("Bahnschrift SemiBold", 14))
             self.node_ids[name] = node
-            if name == "2hide":
-                canvas.config(self.node_ids["2hide"], state="hidden")
 
 
 
